@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="icon" href="transisi_logo.svg">
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="StyleSheet.css" rel="stylesheet">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+</head>
+
+<body>
+
+<div class="split right">
+  <div class="margin-avatar">
+    <img src="avatar_1.jpg" alt="Avatar" class="avatar">
+    <img src="avatar_2.jpg" alt="Avatar" class="avatar">
+    <img src="avatar_3.jpeg" alt="Avatar" class="avatar">
+    <i class="fas fa-plus-circle fa-2x" style="top: 7px; position: relative;"></i>
+  </div>
+  <div class="margin-rightside">
+    <strong style="font-size: 25px;">Cyber Punk</strong>
+    <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+
+    <br><br>
+
+    <strong style="font-size: 17px;">Today</strong>
+    <hr>
+    
+    <form id="todo-list">
+      <span class="todo-wrap">
+        <input type="checkbox" id="1" checked/>
+        <label for="1" class="todo">
+          <i class="fa fa-check"></i>
+          Creating initial layout for homepage
+        </label>
+        <span class="delete-item" title="remove">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </span>
+      <span class="todo-wrap">
+        <input type="checkbox" id="2"/>
+        <label for="2" class="todo">
+          <i class="fa fa-check"></i>
+          Fixing icons with transparent background
+        </label>
+        <span class="delete-item" title="remove">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </span>
+      <span class="todo-wrap">
+        <input type="checkbox" id="3"/>
+        <label for="3" class="todo">
+          <i class="fa fa-check"></i>
+          Create initial layout for homepage
+        </label>
+        <span class="delete-item" title="remove">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </span>
+      <span class="todo-wrap">
+        <input type="checkbox" id="4"/>
+        <label for="4" class="todo">
+          <i class="fa fa-check"></i>
+          Discussions regarding workflow improvement
+        </label>
+        <span class="delete-item" title="remove">
+          <i class="fa fa-times-circle"></i>
+        </span>
+      </span>
+      <div id="add-todo">
+        <i class="fa fa-plus"></i>
+        Add an Item
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<div class="split left">
+  <div class="area">
+    <ul class="circles">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+  <ul class="ul-left">
+    <li class="li-left"><a href="#home"><img class="HoverBackground" src="row_icon.svg" alt="" width="20px" height="20px"></a></li>
+  </ul>
+
+  <div class="centered">
+    <p style="color: whitesmoke; font-size: 48px; text-align: left;">Hi Samantha</p>
+    <p style="line-height: 0; color: grey; text-align: left;">Welcome back to the workspace, we missed You!</p>
+    <br>
+    <div class="inputWithIcon">
+      <input type="text" placeholder="Search Task or Project..." style="padding: 8px; border-radius: 15px; background-color: grey; color: white; padding-left: 40px;" size="150">
+      <i class="fas fa-search" aria-hidden="true"></i>
+    </div>
+        <br><br><br><br>
+           
+    <div class="table-responsive">
+      <table >
+        <thead>
+          <p style="color: rgb(173, 167, 167); text-align: left;">Projects (13)</p>
+          <tr>
+            <td><img class="HoverBorder" src="GH.svg" alt="" height="120" width="120">Green House</img></td>
+            <td><img class="HoverBorder" src="CP.svg" alt="" height="120" width="120">Cyber Punk</img></td>
+            <td><img class="HoverBorder" src="EC.svg" alt="" height="120" width="120">Easy Crypto</img></td>
+          </tr>
+          <tr>
+            <td><img class="HoverBorder" src="TA.svg" alt="" height="120" width="120">Travel App</img></td>
+            <td><img class="HoverBorder" src="LP.svg" alt="" height="120" width="120">Landing Page</img></td>
+            <td><img class="HoverBorder" src="8+.svg" alt="" height="120" width="120">More...</img></td>
+          </tr>
+        </thead>                
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+<script>
+$('#add-todo').click(function(){
+  var lastSibling = $('#todo-list > .todo-wrap:last-of-type > input').attr('id');
+  var newId = Number(lastSibling) + 1;
+      
+  $(this).before('<span class="editing todo-wrap"><input type="checkbox" id="'+newId+'"/><label for="'+newId+'" class="todo"><i class="fa fa-check"></i><input type="text" class="input-todo" id="input-todo'+newId+'"/></label></div>');
+  $('#input-todo'+newId+'').parent().parent().animate({
+    height:"36px"
+  },200)
+  $('#input-todo'+newId+'').focus();
+  
+	$('#input-todo'+newId+'').enterKey(function(){
+    $(this).trigger('enterEvent');
+  })
+  
+  $('#input-todo'+newId+'').on('blur enterEvent',function(){
+    var todoTitle = $('#input-todo'+newId+'').val();
+    var todoTitleLength = todoTitle.length;
+    if (todoTitleLength > 0) {
+      $(this).before(todoTitle);
+      $(this).parent().parent().removeClass('editing');
+      $(this).parent().after('<span class="delete-item" title="remove"><i class="fa fa-times-circle"></i></span>');
+      $(this).remove();
+      $('.delete-item').click(function(){
+        var parentItem = $(this).parent();
+        parentItem.animate({
+          left:"-30%",
+          height:0,
+          opacity:0
+        },200);
+        setTimeout(function(){ $(parentItem).remove(); }, 1000);
+      });
+    }
+    else {
+      $('.editing').animate({
+        height:'0px'
+      },200);
+      setTimeout(function(){
+        $('.editing').remove()
+      },400)
+    }
+  })
+
+});
+
+//hapus list
+
+$('.delete-item').click(function(){
+  var parentItem = $(this).parent();
+  parentItem.animate({
+    left:"-30%",
+    height:0,
+    opacity:0
+  },200);
+  setTimeout(function(){ $(parentItem).remove(); }, 1000);
+});
+
+//enter list
+
+$.fn.enterKey = function (fnc) {
+    return this.each(function () {
+        $(this).keypress(function (ev) {
+            var keycode = (ev.keyCode ? ev.keyCode : ev.which);
+            if (keycode == '13') {
+                fnc.call(this, ev);
+            }
+        })
+    })
+}
+</script>
+
+</body>
+</html>
